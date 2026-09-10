@@ -144,8 +144,8 @@ if game.PlaceId == 4939362930 then
             function VerifiedIcon()
                 return ""
             end
-                        function DeveloperIcon()
-                return "🔨"
+            function DeveloperIcon()
+                return "[🔨Moderator]"
             end
                 local function touchPart(target)
                     if target and target:IsA("BasePart") then
