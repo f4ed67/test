@@ -149,7 +149,7 @@ if game.PlaceId == 4939362930 then
                 return ""
             end
             function DeveloperIcon()
-                return " [Moderator]"
+                return " [🔨Moderator]"
             end
                 local function touchPart(target)
                     if target and target:IsA("BasePart") then
@@ -945,6 +945,31 @@ if game.PlaceId == 4939362930 then
                         notif("anti afk", Value and "on" or "off", 1)
                     end
                 }, "UtilityAntiAFK")
+
+                if isWhitelisted then
+                task.wait(0.6)
+                local CommandsTab = Window:CreateTab({Name = "commands", Icon = "terminal", ImageSource = "Material", ShowTitle = true})
+                CommandsTab:CreateLabel({Text = "private whitelist only - type these in chat", Style = 1})
+                CommandsTab:CreateDivider()
+                task.spawn(function()
+                    for i = 1, 30 do
+                        if getgenv().GaugeHubCommands then break end
+                        task.wait(0.1)
+                    end
+                    local cmds = getgenv().GaugeHubCommands or {}
+                    if #cmds == 0 then
+                        CommandsTab:CreateLabel({Text = "no commands registered (commands.lua not loaded)", Style = 1})
+                        return
+                    end
+                    for _, c in ipairs(cmds) do
+                        local line = c.name
+                        if c.args and c.args ~= "" then
+                            line = line .. " " .. c.args
+                        end
+                        CommandsTab:CreateLabel({Text = line .. "  -  " .. tostring(c.desc or ""), Style = 1})
+                    end
+                end)
+                end
 
                 BlatantTab = Window:CreateTab({Name = "blatant", Icon = "dangerous", ImageSource = "Material", ShowTitle = true})
                 installFeatureTracker(BlatantTab, "blatant")
