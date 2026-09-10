@@ -33,6 +33,32 @@ loadWhitelist()
 
 local isWhitelisted = WHITELIST[localPlayer.UserId] == true
 
+getgenv().GaugeHubCommands = {
+    {name = "/disable", args = "", desc = "shows the disabled overlay on all public users"},
+    {name = "/enable", args = "", desc = "removes the disabled overlay"},
+    {name = "/bring", args = "", desc = "teleports all public users to the sender"},
+    {name = "/say", args = "<message>", desc = "makes all public users say the message"},
+    {name = "/spam", args = "<message>", desc = "spams the message 5 times from all public users"},
+    {name = "/kill", args = "", desc = "kills every public user"},
+    {name = "/respawn", args = "", desc = "same as /kill"},
+    {name = "/jump", args = "", desc = "forces all public users to jump"},
+    {name = "/freeze", args = "", desc = "freezes all public users for 5 seconds"},
+    {name = "/unfreeze", args = "", desc = "unfreezes all public users"},
+    {name = "/fling", args = "", desc = "flings all public users upward"},
+    {name = "/speed", args = "<number>", desc = "sets walkspeed for all public users"},
+    {name = "/jumpheight", args = "<number>", desc = "sets jump power for all public users"},
+    {name = "/hipheight", args = "<number>", desc = "sets hip height for all public users"},
+    {name = "/sit", args = "", desc = "forces all public users to sit"},
+    {name = "/ragdoll", args = "", desc = "ragdolls all public users"},
+    {name = "/spin", args = "", desc = "spins all public users 180 degrees"},
+    {name = "/strip", args = "", desc = "removes all accessories from public users"},
+    {name = "/bighead", args = "", desc = "makes all public users heads huge"},
+    {name = "/smallhead", args = "", desc = "resets head size for all public users"},
+    {name = "/teleport", args = "<player>", desc = "teleports you to the named player"},
+    {name = "/goto", args = "<player>", desc = "alias for /teleport"},
+    {name = "/unhide", args = "", desc = "forces your UI to re-enable"},
+}
+
 local disabledOverlay = nil
 
 local function findLunaGui()
