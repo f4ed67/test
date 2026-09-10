@@ -144,6 +144,9 @@ if game.PlaceId == 4939362930 then
             function VerifiedIcon()
                 return ""
             end
+                        function DeveloperIcon()
+                return "🔨"
+            end
                 local function touchPart(target)
                     if target and target:IsA("BasePart") then
                         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, target, 0)
@@ -510,6 +513,27 @@ if game.PlaceId == 4939362930 then
                         end
                     end
                 }, "CustomCharacterVerified")
+                                local Inpuet = Tab:CreateInput({
+                    Name = "custom character with developer symbol",
+                    Description = "enter a character name and append the hammer symbol.",
+                    PlaceholderText = "character name",
+                    CurrentValue = "",
+                    Numeric = false,
+                    MaxCharacters = nil,
+                    Enter = true,
+                    Callback = function(Text)
+                        if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
+                            game.ReplicatedStorage.Events.Buy:FireServer("Character", Text .. DeveloperIcon())
+                        else
+                            Luna:Notification({
+                                Title = "uh oh!",
+                                Icon = "notifications_active",
+                                ImageSource = "Material",
+                                Content = "you do not have enough coins! you need at least 60!"
+                            })
+                        end
+                    end
+                }, "CustomCharacterDeveloper")
                 local eeq = Tab:CreateToggle({
                     Name = "fake mojo ",
                     Description = "buy mojo with the verified symbol appended.",
