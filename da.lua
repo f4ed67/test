@@ -511,7 +511,7 @@ if game.PlaceId == 4939362930 then
                     end
                 }, "CustomCharacterVerified")
                 local eeq = Tab:CreateToggle({
-                    Name = "fake mojo ",
+                    Name = "fake mojo ",
                     Description = "buy mojo with the verified symbol appended.",
                     CurrentValue = false,
                     Callback = function(Value)
