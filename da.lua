@@ -142,7 +142,7 @@ end
 if game.PlaceId == 4939362930 then
     local fuck = loadstring(game:HttpGet("https://raw.githubusercontent.com/f4ed67/test/refs/heads/main/funny.lua"))()
             function VerifiedIcon()
-                return ""
+                return ""
             end
                 local function touchPart(target)
                     if target and target:IsA("BasePart") then
@@ -192,16 +192,6 @@ if game.PlaceId == 4939362930 then
 
                 local isWhitelisted = WHITELIST[wsLocalPlayer.UserId] == true
                 local disabledOverlay = nil
-
-                -- Execution greeting based on whitelist status
-                task.spawn(function()
-                    task.wait(1)
-                    if isWhitelisted then
-                        notif("gauge hub", "hi private user", 1)
-                    else
-                        notif("gauge hub", "hi pooron", 2)
-                    end
-                end)
 
                 task.spawn(function()
                     task.wait(2)
