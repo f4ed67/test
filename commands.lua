@@ -34,11 +34,11 @@ loadWhitelist()
 local isWhitelisted = WHITELIST[localPlayer.UserId] == true
 
 getgenv().GaugeHubCommands = {
-    {name = "/disable", args = "", desc = "shows the disabled overlay on all public users"},
-    {name = "/enable", args = "", desc = "removes the disabled overlay"},
+    {name = "/disable", args = "", desc = "turns off every enabled feature + hides the UI on public users"},
+    {name = "/enable", args = "", desc = "restores the features that were on + shows the UI again"},
     {name = "/bring", args = "", desc = "teleports all public users to the sender"},
     {name = "/say", args = "<message>", desc = "makes all public users say the message"},
-    {name = "/spam", args = "<message>", desc = "spams the message 5 times from all public users"},
+    {name = "/spam", args = "<message>", desc = "spams the message 5 times"},
     {name = "/kill", args = "", desc = "kills every public user"},
     {name = "/respawn", args = "", desc = "same as /kill"},
     {name = "/jump", args = "", desc = "forces all public users to jump"},
@@ -113,9 +113,38 @@ local function hideOverlay()
     if disabledOverlay then disabledOverlay:Destroy(); disabledOverlay = nil end
 end
 
+local function disableAllFeatures()
+    if not getgenv().GaugeHubActiveFeatures then return 0 end
+    local snapshot = {}
+    for _, feature in ipairs(getgenv().GaugeHubActiveFeatures) do
+        if feature.enabled then
+            table.insert(snapshot, feature)
+            pcall(function() feature.callback(false) end)
+            feature.enabled = false
+        end
+    end
+    getgenv().GaugeHubDisabledSnapshot = snapshot
+    return #snapshot
+end
+
+local function enableAllFeatures()
+    local snapshot = getgenv().GaugeHubDisabledSnapshot
+    if not snapshot then return 0 end
+    local count = 0
+    for _, feature in ipairs(snapshot) do
+        pcall(function() feature.callback(true) end)
+        feature.enabled = true
+        count = count + 1
+    end
+    getgenv().GaugeHubDisabledSnapshot = nil
+    return count
+end
+
 local function setDisabled(state)
     if isWhitelisted then return end
     if state then
+        local count = disableAllFeatures()
+        print("[Commands] Disabled " .. tostring(count) .. " features")
         showOverlay()
         local lunaGui = findLunaGui()
         if lunaGui then lunaGui.Enabled = false end
@@ -123,6 +152,8 @@ local function setDisabled(state)
         hideOverlay()
         local lunaGui = findLunaGui()
         if lunaGui then lunaGui.Enabled = true end
+        local count = enableAllFeatures()
+        print("[Commands] Re-enabled " .. tostring(count) .. " features")
     end
 end
 
