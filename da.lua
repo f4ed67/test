@@ -140,10 +140,6 @@ end
 startHamAndCheeseToastie()
 end
 if game.PlaceId == 4939362930 then
-    local function ayaLog(msg)
-        print("[AYA] " .. tostring(msg))
-    end
-
     local fuck = loadstring(game:HttpGet("https://raw.githubusercontent.com/f4ed67/test/refs/heads/main/funny.lua"))()
     local pikachu = loadstring(game:HttpGet("https://raw.githubusercontent.com/f4ed67/test/refs/heads/main/d.lua"))()
             function VerifiedIcon()
@@ -320,7 +316,7 @@ if game.PlaceId == 4939362930 then
                         end
                     end
                     getgenv().GaugeHubDisabledSnapshot = snapshot
-                    ayaLog("disabled " .. #snapshot .. " features")
+                    print("[GaugeHub] Disabled " .. #snapshot .. " features")
                     return #snapshot
                 end
 
@@ -331,7 +327,7 @@ if game.PlaceId == 4939362930 then
                         pcall(function() feature.callback(true) end)
                         feature.enabled = true
                     end
-                    ayaLog("re-enabled " .. #snapshot .. " features")
+                    print("[GaugeHub] Re-enabled " .. #snapshot .. " features")
                     getgenv().GaugeHubDisabledSnapshot = nil
                     return #snapshot
                 end
@@ -391,7 +387,6 @@ if game.PlaceId == 4939362930 then
                     if voteDetectionEnabled and (child:IsA("ObjectValue") or child:IsA("StringValue") or child:IsA("IntValue") or child:IsA("NumberValue")) then
                         local whoVoted = game:GetService("ReplicatedStorage").Season.Players[child.Value].Value
                         local gotVoted = game:GetService("ReplicatedStorage").Season.Players[child.Name].Value
-                        ayaLog(whoVoted .. " voted " .. gotVoted)
                         notif("voting", whoVoted .. " voted " .. gotVoted, 3)
                     end
                 end
@@ -468,7 +463,6 @@ if game.PlaceId == 4939362930 then
                                     }
                                     config.Callback = function(Value)
                                         record.enabled = Value and true or false
-                                        ayaLog(tostring(config.Name) .. (Value and " on" or " off"))
                                         return userCallback(Value)
                                     end
                                     table.insert(getgenv().GaugeHubActiveFeatures, record)
@@ -495,10 +489,8 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Text)
                         if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
                             game.ReplicatedStorage.Events.Buy:FireServer("Character", Text)
-                            ayaLog("sent custom character: " .. tostring(Text))
                             notif("character", "sent: " .. Text, 1)
                         else
-                            ayaLog("custom character failed - not enough coins")
                             notif("character", "you need 60 coins", 2)
                         end
                     end
@@ -512,10 +504,8 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Text)
                         if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
                             game.ReplicatedStorage.Events.Buy:FireServer("Character", Text .. VerifiedIcon())
-                            ayaLog("sent custom character verified: " .. tostring(Text))
                             notif("character", "sent: " .. Text, 1)
                         else
-                            ayaLog("custom character verified failed - not enough coins")
                             notif("character", "you need 60 coins", 2)
                         end
                     end
@@ -529,10 +519,8 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Text)
                         if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
                             game.ReplicatedStorage.Events.Buy:FireServer("Character", Text .. DeveloperIcon())
-                            ayaLog("sent custom character developer: " .. tostring(Text))
                             notif("character", "sent: " .. Text, 1)
                         else
-                            ayaLog("custom character developer failed - not enough coins")
                             notif("character", "you need 60 coins", 2)
                         end
                     end
@@ -545,10 +533,8 @@ if game.PlaceId == 4939362930 then
                         if not Value then return end
                         if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
                             game.ReplicatedStorage.Events.Buy:FireServer("Character", "Mojo" .. VerifiedIcon())
-                            ayaLog("fake mojo sent")
                             notif("mojo", "fake mojo sent", 1)
                         else
-                            ayaLog("fake mojo failed - not enough coins")
                             notif("mojo", "you need 60 coins", 2)
                         end
                     end
@@ -563,10 +549,8 @@ if game.PlaceId == 4939362930 then
                             local success = pcall(function()
                                 game.ReplicatedStorage.Events.Buy:FireServer("Character", returnFucker())
                             end)
-                            ayaLog(success and "server crash comeback sent" or "server crash comeback failed")
                             notif("comeback", success and "game-breaking character sent" or "comeback failed", success and 1 or 2)
                         else
-                            ayaLog("server crash comeback failed - not enough coins")
                             notif("comeback", "you need 60 coins", 2)
                         end
                     end
@@ -580,10 +564,8 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Text)
                         if game.Players.LocalPlayer.DataStore.Coins.Value > 59 then
                             game.ReplicatedStorage.Events.Buy:FireServer("Character", Text)
-                            ayaLog("comeback 2 sent: " .. tostring(Text))
                             notif("comeback 2", "sent: " .. Text, 1)
                         else
-                            ayaLog("comeback 2 failed - not enough coins")
                             notif("comeback 2", "you need 60 coins", 2)
                         end
                     end
@@ -597,7 +579,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         game.ReplicatedStorage.Events.Buy:FireServer("Gender", "Male")
-                        ayaLog("gender set to male")
                         notif("gender", "male set", 1)
                     end
                 })
@@ -608,7 +589,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         game.ReplicatedStorage.Events.Buy:FireServer("Gender", "Female")
-                        ayaLog("gender set to female")
                         notif("gender", "female set", 1)
                     end
                 })
@@ -684,7 +664,6 @@ if game.PlaceId == 4939362930 then
                                     if getgenv().usernameEnabled then watchPlayer(plr) end
                                 end)
                             end
-                            ayaLog("usernames on")
                             notif("usernames", "on", 1)
                         else
                             for lbl, txt in pairs(getgenv().usernameOriginals) do
@@ -698,7 +677,6 @@ if game.PlaceId == 4939362930 then
                                 pcall(function() getgenv().usernamePlayerAddedConn:Disconnect() end)
                                 getgenv().usernamePlayerAddedConn = nil
                             end
-                            ayaLog("usernames off")
                             notif("usernames", "off", 1)
                         end
                     end
@@ -709,7 +687,6 @@ if game.PlaceId == 4939362930 then
                     CurrentValue = false,
                     Callback = function(Value)
                         workspace.Map["Roblox Drama: Camp"].Map.Lake.Water.CanCollide = Value
-                        ayaLog("jesus mode " .. (Value and "on" or "off"))
                         notif("jesus mode", Value and "on" or "off", 1)
                     end
                 }, "JesusMode")
@@ -720,7 +697,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         workspace.Map["Roblox Drama: Camp"].Sand.TouchInterest:Destroy()
-                        ayaLog("water god on")
                         notif("water god", "on", 1)
                     end
                 })
@@ -739,7 +715,6 @@ if game.PlaceId == 4939362930 then
                                 campfire.TouchInterest:Destroy()
                             end
                         end
-                        ayaLog("barriers destroyed")
                         notif("barriers", "destroyed", 1)
                     end
                 })
@@ -751,11 +726,9 @@ if game.PlaceId == 4939362930 then
                         voteDetectionEnabled = Value
                         if voteDetectionEnabled then
                             if not voteConnection then voteConnection = monitorVotes() end
-                            ayaLog("notify votes on")
                             notif("votes", "notifications on", 1)
                         else
                             if voteConnection then voteConnection:Disconnect(); voteConnection = nil end
-                            ayaLog("notify votes off")
                             notif("votes", "notifications off", 1)
                         end
                     end
@@ -768,11 +741,9 @@ if game.PlaceId == 4939362930 then
                         voteDetectionEnabled = Value
                         if voteDetectionEnabled then
                             if not voteConnection then voteConnection = chatVotes() end
-                            ayaLog("expose votes on")
                             notif("votes", "exposing", 1)
                         else
                             if voteConnection then voteConnection:Disconnect(); voteConnection = nil end
-                            ayaLog("expose votes off")
                             notif("votes", "stopped", 1)
                         end
                     end
@@ -793,12 +764,11 @@ if game.PlaceId == 4939362930 then
                         if not humanoidRootPart then return end
                         local bag = workspace.Idols:FindFirstChild("Bag")
                         if bag then touchPart(bag:FindFirstChild("hit"))
-                        else ayaLog("get statue - no bag found") end
+                        else notif("statue", "no bag found", 2) end
                         task.wait()
                         local idol = workspace.Idols:FindFirstChild("SafetyStatue")
                         if idol then touchPart(idol:FindFirstChild("hit"))
-                        else ayaLog("get statue - no statue found") end
-                        ayaLog("statue collected")
+                        else notif("statue", "no statue found", 2) end
                         notif("statue", "collected", 1)
                     end
                 })
@@ -810,7 +780,6 @@ if game.PlaceId == 4939362930 then
                         if not Value then return end
                         local getValue = game:GetService("ReplicatedStorage").Season.Twists.Idol.Value
                         local whoHas = game:GetService("ReplicatedStorage").Season.Players[getValue].Value
-                        ayaLog(whoHas .. " has the statue")
                         notif("statue", whoHas .. " has the statue", 1)
                     end
                 })
@@ -827,7 +796,7 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         local root = wsLocalPlayer.Character and wsLocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if root then root.CFrame = CFrame.new(-684, -70, -637); ayaLog("teleported to lobby"); notif("teleport", "to lobby", 1) end
+                        if root then root.CFrame = CFrame.new(-684, -70, -637); notif("teleport", "to lobby", 1) end
                     end
                 })
                 end
@@ -843,7 +812,7 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         local root = wsLocalPlayer.Character and wsLocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if root then root.CFrame = CFrame.new(-77, -28, -904); ayaLog("teleported to expedition lobby"); notif("teleport", "to expedition lobby", 1) end
+                        if root then root.CFrame = CFrame.new(-77, -28, -904); notif("teleport", "to expedition lobby", 1) end
                     end
                 })
                 end
@@ -854,6 +823,7 @@ if game.PlaceId == 4939362930 then
                 local livePlayersLabel = ClosetTab:CreateLabel({Text = "loading...", Style = 1})
                 local liveStatueLabel = ClosetTab:CreateLabel({Text = "loading...", Style = 1})
                 local livePerformanceLabel = ClosetTab:CreateLabel({Text = "loading...", Style = 1})
+                local liveVoteCountLabel = ClosetTab:CreateLabel({Text = "votes recorded: 0", Style = 1})
                 local totalTimePlayedLabel = ClosetTab:CreateLabel({Text = "total time played: 0s", Style = 1})
                 local ReplicatedStorage = game:GetService("ReplicatedStorage")
                 local Players = game:GetService("Players")
@@ -948,7 +918,7 @@ if game.PlaceId == 4939362930 then
                         local character = localPlayer.Character
                         local targetRoot = target and target.Character and target.Character:FindFirstChild("HumanoidRootPart")
                         local root = character and character:FindFirstChild("HumanoidRootPart")
-                        if targetRoot and root then root.CFrame = targetRoot.CFrame; ayaLog("teleported to " .. target.Name); notif("teleport", "to " .. target.Name, 1) end
+                        if targetRoot and root then root.CFrame = targetRoot.CFrame; notif("teleport", "to " .. target.Name, 1) end
                     end
                 })
                 ClosetTab:CreateToggle({
@@ -960,12 +930,12 @@ if game.PlaceId == 4939362930 then
                             local target = Players:FindFirstChild(selectedPlayer or "")
                             if target and target.Character then
                                 local humanoid = target.Character:FindFirstChildOfClass("Humanoid")
-                                if humanoid then workspace.CurrentCamera.CameraSubject = humanoid; ayaLog("spectating " .. target.Name); notif("spectate", "watching " .. target.Name, 1) end
+                                if humanoid then workspace.CurrentCamera.CameraSubject = humanoid; notif("spectate", "watching " .. target.Name, 1) end
                             end
                         else
                             local character = localPlayer.Character
                             local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-                            if humanoid then workspace.CurrentCamera.CameraSubject = humanoid; ayaLog("spectate off"); notif("spectate", "off", 1) end
+                            if humanoid then workspace.CurrentCamera.CameraSubject = humanoid; notif("spectate", "off", 1) end
                         end
                     end
                 }, "UtilitySpectate")
@@ -975,7 +945,6 @@ if game.PlaceId == 4939362930 then
                     CurrentValue = false,
                     Callback = function(Value)
                         getgenv().utilityAntiAFK = Value
-                        ayaLog("anti afk " .. (Value and "on" or "off"))
                         notif("anti afk", Value and "on" or "off", 1)
                     end
                 }, "UtilityAntiAFK")
@@ -988,7 +957,6 @@ if game.PlaceId == 4939362930 then
                     CurrentValue = false,
                     Callback = function(Value)
                         getgenv().utilityNoclip = Value
-                        ayaLog("noclip " .. (Value and "on" or "off"))
                         notif("noclip", Value and "on" or "off", 1)
                     end
                 }, "UtilityNoclip")
@@ -999,7 +967,7 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         if not Value then return end
                         local humanoid = localPlayer.Character and localPlayer.Character:FindFirstChildOfClass("Humanoid")
-                        if humanoid then humanoid.Health = 0; ayaLog("reset character"); notif("reset", "respawning", 1) end
+                        if humanoid then humanoid.Health = 0; notif("reset", "respawning", 1) end
                     end
                 })
                 BlatantTab:CreateToggle({
@@ -1008,7 +976,6 @@ if game.PlaceId == 4939362930 then
                     CurrentValue = false,
                     Callback = function(Value)
                         getgenv().godMode = Value
-                        ayaLog("god mode " .. (Value and "on" or "off"))
                         notif("god mode", Value and "on" or "off", 1)
                     end
                 }, "GodMode")
@@ -1022,8 +989,8 @@ if game.PlaceId == 4939362930 then
                         local statue = idols and idols:FindFirstChild("SafetyStatue")
                         local hit = statue and statue:FindFirstChild("hit")
                         local root = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if hit and root then root.CFrame = hit.CFrame; ayaLog("statue found"); notif("statue", "found", 1)
-                        else ayaLog("statue not found"); notif("statue", "not found", 2) end
+                        if hit and root then root.CFrame = hit.CFrame; notif("statue", "found", 1)
+                        else notif("statue", "not found", 2) end
                     end
                 })
                 BlatantTab:CreateToggle({
@@ -1036,8 +1003,8 @@ if game.PlaceId == 4939362930 then
                         local bag = idols and idols:FindFirstChild("Bag")
                         local hit = bag and bag:FindFirstChild("hit")
                         local root = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if hit and root then root.CFrame = hit.CFrame; ayaLog("bag found"); notif("bag", "found", 1)
-                        else ayaLog("bag not found"); notif("bag", "not found", 2) end
+                        if hit and root then root.CFrame = hit.CFrame; notif("bag", "found", 1)
+                        else notif("bag", "not found", 2) end
                     end
                 })
                 BlatantTab:CreateToggle({
@@ -1051,7 +1018,7 @@ if game.PlaceId == 4939362930 then
                         if assets and root then
                             for _, challenge in ipairs(assets:GetChildren()) do
                                 local finish = challenge:FindFirstChild("Finish")
-                                if finish and finish:IsA("BasePart") then root.CFrame = finish.CFrame; ayaLog("teleported to finish"); notif("finish", "teleported", 1); break end
+                                if finish and finish:IsA("BasePart") then root.CFrame = finish.CFrame; notif("finish", "teleported", 1); break end
                             end
                         end
                     end
@@ -1093,11 +1060,13 @@ if game.PlaceId == 4939362930 then
                             local playerValue = idol and playersFolder and playersFolder:FindFirstChild(tostring(idol.Value))
                             if playerValue then statueHolder = tostring(playerValue.Value) end
                         end)
+                        local currentVotes = currentVoteFolder and #currentVoteFolder:GetChildren() or 0
                         local ping = "unknown"
                         pcall(function() ping = tostring(math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())) .. " ms" end)
                         livePlayersLabel:Set("players: " .. tostring(playerCount) .. "\nCoins: " .. coins)
                         liveStatueLabel:Set("statue holder: " .. statueHolder)
                         livePerformanceLabel:Set("fps: " .. tostring(fpsValue) .. "\nPing: " .. ping)
+                        liveVoteCountLabel:Set("votes recorded: " .. tostring(currentVotes))
                         local currentTotalTime = totalTimePlayed + (os.clock() - sessionStart)
                         totalTimePlayedLabel:Set("Total Time Played: " .. formatTime(currentTotalTime))
                         if timeFile and writefile and currentTotalTime - lastTimeWrite >= 30 then
@@ -1120,7 +1089,7 @@ if game.PlaceId == 4939362930 then
                     Name = "sword fight reach",
                     Description = "sets the reach value used by apply sword fight reach. 0-200 studs.",
                     Range = {0, 200}, Increment = 5, CurrentValue = 100,
-                    Callback = function(Value) getgenv().reach = Value; ayaLog("reach set to " .. tostring(Value)) end
+                    Callback = function(Value) getgenv().reach = Value end
                 }, "SwordFightReach")
                 FunTab:CreateToggle({
                     Name = "apply sword fight reach",
@@ -1143,7 +1112,6 @@ if game.PlaceId == 4939362930 then
                                 speaker.Character:FindFirstChildOfClass('Humanoid'):UnequipTools()
                             end
                         end
-                        ayaLog("sword fight reach applied")
                         notif("sword", "reach applied", 1)
                     end
                 })
@@ -1159,31 +1127,11 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autofarm = Value
                         if not Value then return end
-                        getgenv().ayaCoinCount = 0
-                        getgenv().ayaGemCount = 0
-                        ayaLog("auto collect on")
                         notif("auto collect", "on", 1)
                         task.spawn(function()
                             while getgenv().autofarm do
                                 task.wait()
-                                for _, gems in pairs(workspace.Assets["Coin Hunt"].Coins:GetChildren()) do
-                                    touchPart(gems)
-                                    if gems.Name == "Gem" then
-                                        getgenv().ayaGemCount = getgenv().ayaGemCount + 1
-                                        ayaLog("collected a gem")
-                                    else
-                                        getgenv().ayaCoinCount = getgenv().ayaCoinCount + 1
-                                        ayaLog("collected a coin")
-                                    end
-                                end
-                            end
-                        end)
-                        task.spawn(function()
-                            while getgenv().autofarm do
-                                task.wait(5)
-                                if getgenv().autofarm then
-                                    ayaLog("collected a total of " .. getgenv().ayaCoinCount .. " coins and " .. getgenv().ayaGemCount .. " gems")
-                                end
+                                for _, gems in pairs(workspace.Assets["Coin Hunt"].Coins:GetChildren()) do touchPart(gems) end
                             end
                         end)
                     end
@@ -1195,7 +1143,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoEatPancake = Value
                         if not Value then return end
-                        ayaLog("instant-eat pancake on")
                         notif("pancake", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoEatPancake do
@@ -1207,7 +1154,6 @@ if game.PlaceId == 4939362930 then
                                 for _, v in pairs(workspace:GetDescendants()) do
                                     if v.Name == game.Players.LocalPlayer.Name and v:FindFirstChild("ClickDetector") then
                                         fireclickdetector(v.ClickDetector)
-                                        ayaLog("ate pancake")
                                     end
                                 end
                             end
@@ -1216,44 +1162,30 @@ if game.PlaceId == 4939362930 then
                 })
                 AutoTab:CreateToggle({
                     Name = "win blockpush!",
-                    Description = "teleports you and the box onto the finish pad.",
+                    Description = "auto-teleports you onto the gold block whenever a SingularBox is nearby.",
                     CurrentValue = false,
                     Callback = function(Value)
                         getgenv().autoBlockPush = Value
                         if not Value then return end
-                        ayaLog("win blockpush on")
                         notif("blockpush", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoBlockPush do
                                 task.wait(0.3)
                                 local root = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                                if not root then continue end
-                                local finish = nil
-                                local assets = workspace:FindFirstChild("Assets")
-                                if assets then
-                                    for _, challenge in ipairs(assets:GetChildren()) do
-                                        local f = challenge:FindFirstChild("Finish")
-                                        if f and f:IsA("BasePart") then
-                                            finish = f
+                                if root then
+                                    for _, v in ipairs(workspace:GetDescendants()) do
+                                        if v:IsA("Part") and v.Name == "SingularBox" and (v.Position - root.Position).Magnitude <= 100 then
+                                            for _, v2 in ipairs(workspace:GetDescendants()) do
+                                                if v2:IsA("Part") and v2.Name == "Gold" then
+                                                    local tpPos = v2.Position + Vector3.new(0, 3, 0)
+                                                    v.Position = tpPos
+                                                    root.CFrame = CFrame.new(tpPos)
+                                                    break
+                                                end
+                                            end
                                             break
                                         end
                                     end
-                                end
-                                local box = nil
-                                for _, v in ipairs(workspace:GetDescendants()) do
-                                    if v:IsA("BasePart") and v.Name == "SingularBox" and (v.Position - root.Position).Magnitude <= 200 then
-                                        box = v
-                                        break
-                                    end
-                                end
-                                if finish and box then
-                                    local targetPos = finish.Position + Vector3.new(0, 2, 0)
-                                    box.CFrame = CFrame.new(targetPos)
-                                    root.CFrame = CFrame.new(targetPos + Vector3.new(0, 3, 0))
-                                    ayaLog("pushed box onto finish")
-                                elseif finish then
-                                    root.CFrame = finish.CFrame + Vector3.new(0, 3, 0)
-                                    ayaLog("teleported to finish")
                                 end
                             end
                         end)
@@ -1266,7 +1198,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().detectExploiters = Value
                         if not Value then return end
-                        ayaLog("detect exploiters on")
                         notif("detector", "on", 1)
                         task.spawn(function()
                             while getgenv().detectExploiters do
@@ -1282,7 +1213,8 @@ if game.PlaceId == 4939362930 then
                                     end
                                 end
                                 if #detectedExploiters > 0 then
-                                    for _, e in pairs(detectedExploiters) do ayaLog(e) end
+                                    print("Potential Exploiters Detected:")
+                                    for _, e in pairs(detectedExploiters) do print(e) end
                                 end
                             end
                         end)
@@ -1302,14 +1234,12 @@ if game.PlaceId == 4939362930 then
                             getgenv().dodgeballConn = humanoid.HealthChanged:Connect(function(health)
                                 if getgenv().dodgeballProtect and health < math.huge then humanoid.Health = math.huge end
                             end)
-                            ayaLog("dodgeball protection on")
                             notif("dodgeball", "protection on", 1)
                         else
                             getgenv().dodgeballProtect = false
                             if getgenv().dodgeballConn then getgenv().dodgeballConn:Disconnect(); getgenv().dodgeballConn = nil end
                             local humanoid = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
                             if humanoid then humanoid.MaxHealth = 100; humanoid.Health = 100 end
-                            ayaLog("dodgeball protection off")
                             notif("dodgeball", "protection off", 1)
                         end
                     end
@@ -1321,14 +1251,12 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoSpleef = Value
                         if not Value then return end
-                        ayaLog("spleef on")
                         notif("spleef", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoSpleef do
                                 task.wait(0.4)
                                 pcall(function()
                                     for i, v in pairs(workspace.Assets.Spleef.Spleef.SpleefBlocks:GetChildren()) do touchPart(v) end
-                                    ayaLog("broke spleef blocks")
                                 end)
                             end
                         end)
@@ -1341,7 +1269,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoMathMania = Value
                         if not Value then return end
-                        ayaLog("math mania on")
                         notif("math mania", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoMathMania do
@@ -1350,7 +1277,6 @@ if game.PlaceId == 4939362930 then
                                     for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MathMania:GetChildren()) do
                                         if v:FindFirstChild("Answer") and v:FindFirstChild("Box") then
                                             v.Box.Text = v.Answer.Value
-                                            ayaLog("filled math mania answer: " .. tostring(v.Answer.Value))
                                         end
                                     end
                                 end)
@@ -1370,7 +1296,6 @@ if game.PlaceId == 4939362930 then
                         for _, v in pairs(workspace.Assets:GetDescendants()) do
                             if v.Name == "MonsterNPC" then v:Destroy() end
                         end
-                        ayaLog("monster removed")
                         notif("monster", "removed", 1)
                     end
                 })
@@ -1381,7 +1306,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoEatBowl = Value
                         if not Value then return end
-                        ayaLog("instant-eat-bowl on")
                         notif("bowl", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoEatBowl do
@@ -1389,7 +1313,6 @@ if game.PlaceId == 4939362930 then
                                 for _, v in pairs(game.Workspace:GetDescendants()) do
                                     if v.Name == game.Players.LocalPlayer.Name and v:FindFirstChild("ClickDetector") then
                                         fireclickdetector(v.ClickDetector)
-                                        ayaLog("ate bowl")
                                     end
                                 end
                             end
@@ -1403,7 +1326,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoEgg = Value
                         if not Value then return end
-                        ayaLog("auto collect egg on")
                         notif("egg", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoEgg do
@@ -1434,7 +1356,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoPirate = Value
                         if not Value then return end
-                        ayaLog("win pirate on")
                         notif("pirate", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoPirate do
@@ -1445,7 +1366,6 @@ if game.PlaceId == 4939362930 then
                                         if hrp then
                                             if v:IsA("BasePart") then hrp.CFrame = v.CFrame
                                             elseif v:IsA("Model") then hrp.CFrame = v:GetPivot() end
-                                            ayaLog("grabbed main key")
                                         end
                                         task.wait(0.1)
                                     end
@@ -1453,7 +1373,7 @@ if game.PlaceId == 4939362930 then
                                 for _, v in pairs(workspace:GetDescendants()) do
                                     if v.Name == "win" and v:IsA("BasePart") then
                                         local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                                        if hrp then hrp.CFrame = v.CFrame; ayaLog("teleported to pirate win pad") end
+                                        if hrp then hrp.CFrame = v.CFrame end
                                     end
                                 end
                             end
@@ -1467,7 +1387,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoBeachKill = Value
                         if not Value then return end
-                        ayaLog("beach auto kill on")
                         notif("beach", "auto kill on", 1)
                         task.spawn(function()
                             while getgenv().autoBeachKill do
@@ -1483,7 +1402,6 @@ if game.PlaceId == 4939362930 then
                                             if string.lower(v.Name):find("pool") or string.lower(v.Name):find("noodle") then
                                                 local mytool = v:Clone(); mytool.Parent = player.Backpack
                                                 if mytool.Equip then mytool:Equip() end
-                                                ayaLog("equipped noodle tool")
                                                 break
                                             end
                                         end
@@ -1495,7 +1413,6 @@ if game.PlaceId == 4939362930 then
                                             if targetPlayer ~= player and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") and targetPlayer.Character:FindFirstChild("Humanoid") then
                                                 local targetHRP = targetPlayer.Character.HumanoidRootPart
                                                 local targetHum = targetPlayer.Character.Humanoid
-                                                ayaLog("attacking " .. targetPlayer.Name)
                                                 hrp.CFrame = CFrame.lookAt(targetHRP.Position - targetHRP.CFrame.LookVector * 3, targetHRP.Position)
                                                 task.wait()
                                                 for _ = 1, 25 do
@@ -1519,8 +1436,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().collectPrehistoricCoins = Value
                         if not Value then return end
-                        getgenv().ayaCoinCount = 0
-                        ayaLog("get prehistoric coins on")
                         notif("coins", "on", 1)
                         task.spawn(function()
                             while getgenv().collectPrehistoricCoins do
@@ -1530,8 +1445,6 @@ if game.PlaceId == 4939362930 then
                                     for _, v in pairs(workspace.Assets:GetDescendants()) do
                                         if v.Name == "Coin" and v:IsA("BasePart") then
                                             v.Transparency = 1; v.CanCollide = false; v.Position = root.Position
-                                            getgenv().ayaCoinCount = getgenv().ayaCoinCount + 1
-                                            ayaLog("collected a prehistoric coin")
                                         end
                                     end
                                 end
@@ -1546,9 +1459,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().collectGuitars = Value
                         if not Value then return end
-                        getgenv().ayaCoinCount = 0
-                        getgenv().ayaGemCount = 0
-                        ayaLog("get guitars on")
                         notif("guitars", "on", 1)
                         task.spawn(function()
                             while getgenv().collectGuitars do
@@ -1558,13 +1468,6 @@ if game.PlaceId == 4939362930 then
                                     for _, v in pairs(workspace:GetDescendants()) do
                                         if (v.Name == "Gem" or v.Name == "Coin") and v:IsA("BasePart") then
                                             v.Transparency = 1; v.Position = root.Position
-                                            if v.Name == "Gem" then
-                                                getgenv().ayaGemCount = getgenv().ayaGemCount + 1
-                                                ayaLog("collected a guitar gem")
-                                            else
-                                                getgenv().ayaCoinCount = getgenv().ayaCoinCount + 1
-                                                ayaLog("collected a guitar coin")
-                                            end
                                         end
                                     end
                                 end
@@ -1582,7 +1485,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoHawaii = Value
                         if not Value then return end
-                        ayaLog("win hawaii on")
                         notif("hawaii", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoHawaii do
@@ -1590,7 +1492,6 @@ if game.PlaceId == 4939362930 then
                                 for _, v in pairs(workspace:GetDescendants()) do
                                     if v.Name == "Tiki" and v:FindFirstChild("ClickDetector") then
                                         for _ = 1, 10 do fireclickdetector(v.ClickDetector) end
-                                        ayaLog("clicked tiki")
                                     end
                                 end
                             end
@@ -1604,7 +1505,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().collectClovers = Value
                         if not Value then return end
-                        ayaLog("get clovers on")
                         notif("clovers", "on", 1)
                         task.spawn(function()
                             while getgenv().collectClovers do
@@ -1628,7 +1528,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().collectRings = Value
                         if not Value then return end
-                        ayaLog("get rings on")
                         notif("rings", "on", 1)
                         task.spawn(function()
                             while getgenv().collectRings do
@@ -1654,7 +1553,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().breakAmazon = Value
                         if not Value then return end
-                        ayaLog("break amazon on")
                         notif("amazon", "breaking", 1)
                         task.spawn(function()
                             while getgenv().breakAmazon do
@@ -1666,7 +1564,6 @@ if game.PlaceId == 4939362930 then
                                             firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
                                             task.wait()
                                             firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)
-                                            ayaLog("broke amazon spleef part")
                                         end
                                     end
                                 end
@@ -1681,7 +1578,6 @@ if game.PlaceId == 4939362930 then
                     Callback = function(Value)
                         getgenv().autoCheese = Value
                         if not Value then return end
-                        ayaLog("auto win cheese on")
                         notif("cheese", "auto on", 1)
                         task.spawn(function()
                             while getgenv().autoCheese do
@@ -1702,7 +1598,6 @@ if game.PlaceId == 4939362930 then
                                                         local tpPos = part.Position + Vector3.new(0, 3, 0)
                                                         v.Position = tpPos
                                                         root.CFrame = CFrame.new(tpPos)
-                                                        ayaLog("pushed cheese to finish")
                                                     end
                                                 end
                                             end
@@ -1853,7 +1748,6 @@ if game.PlaceId == 4939362930 then
                 local function showFeatureIdentifier(control, feature)
                     local featureName = feature and feature.name or "feature"
                     local tabName = feature and tostring(feature.tab) or "?"
-                    ayaLog("jumped to " .. featureName .. " on " .. tabName)
                     notif("▼ HERE ▼", featureName .. "\nis on the " .. tabName .. " tab.", 3)
                     if control then
                         blinkFeatureName(control, feature)
@@ -1905,7 +1799,6 @@ if game.PlaceId == 4939362930 then
                         if selectedFeature then
                             local moved = openFeatureTab(selectedFeature)
                             if not moved then
-                                ayaLog("could not open " .. tostring(selectedFeature.tab) .. " tab")
                                 notif("feature", "could not open the " .. tostring(selectedFeature.tab) .. " tab.", 2)
                             end
                         end
